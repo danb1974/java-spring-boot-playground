@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Movie rental</title>
+</head>
+<body layout:fragment="body">
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-evenly h4 my-4" th:text="'Movie database on ' + ${date}"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Movie title</th>
+                <th scope="col">Release date</th>
+                <th scope="col">Directed by</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr th:each="movie: ${movies}">
+                <td th:text="${movie.title}">Avatar 2</td>
+                <td class="text-nowrap" th:text="${movie.date}">2022</td>
+                <td class="text-nowrap" th:text="${movie.director.fullName}">James Cameron</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
