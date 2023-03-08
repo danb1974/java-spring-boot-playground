@@ -1,7 +1,6 @@
 package com.example.movielibrary.entity;
 
 import jakarta.persistence.*;
-import org.springframework.util.StringUtils;
 
 @Entity
 @Table(name = "directors")

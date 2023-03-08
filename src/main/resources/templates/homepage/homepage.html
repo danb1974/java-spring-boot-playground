@@ -25,11 +25,36 @@
             <tr th:each="movie: ${movies}">
                 <td th:text="${movie.title}">Avatar 2</td>
                 <td class="text-nowrap" th:text="${movie.date}">2022</td>
-                <td class="text-nowrap" th:text="${movie.director.fullName}">James Cameron</td>
+                <td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-evenly h4 my-4">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" th:if="${pager.showPrev}">
+                        <a class="page-link" th:href="@{''(page=${pager.currentPage} - 1)}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(pager.firstPage, pager.lastPage)}">
+                        <a class="page-link" th:href="@{''(page=${page})}" th:classappend="${page == pager.currentPage} ? 'active'" th:text="${page}">1</a>
+                    </li>
+                    <li class="page-item" th:if="${pager.showNext}">
+                        <a class="page-link" th:href="@{''(page=${pager.currentPage} + 1)}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

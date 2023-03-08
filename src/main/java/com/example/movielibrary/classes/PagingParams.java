@@ -5,9 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public class PagingParams {
-    private int page = 1;
+    private final int page;
 
-    private int limit = 0;
+    private final int limit;
 
     public PagingParams(int page, int limit) {
         this.page = page;

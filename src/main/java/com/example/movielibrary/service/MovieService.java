@@ -1,6 +1,6 @@
 package com.example.movielibrary.service;
 
-import com.example.movielibrary.classes.PagedResult;
+import com.example.movielibrary.classes.PagedRecords;
 import com.example.movielibrary.classes.PagingParams;
 import com.example.movielibrary.entity.Movie;
 import com.example.movielibrary.repository.MovieRepository;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class MovieService {
-    MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -23,10 +23,10 @@ public class MovieService {
         return movieRepository.findAll(sort);
     }
 
-    public PagedResult<Movie> getMovies(PagingParams pagingParams) {
+    public PagedRecords<Movie> getMovies(PagingParams pagingParams) {
         Sort sort = getDefaultSort();
         Page<Movie> page = movieRepository.findAll(pagingParams.getPageable(sort));
-        return new PagedResult<Movie>(page);
+        return new PagedRecords<>(page);
     }
 
     private Sort getDefaultSort() {
