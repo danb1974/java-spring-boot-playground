@@ -5,6 +5,8 @@ public class MovieDto extends BaseDto {
 
     private String date;
 
+    private boolean rented;
+
     private String directorFullName;
 
     public String getTitle() {
@@ -21,6 +23,14 @@ public class MovieDto extends BaseDto {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     public String getDirectorFullName() {

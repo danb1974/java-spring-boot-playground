@@ -21,7 +21,7 @@
                         <a class="nav-link" th:classappend="${rented} ? 'active'" th:href="@{''(filter=rented)}">Rented</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-none d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
@@ -39,13 +39,15 @@
                     <th scope="col">Movie title</th>
                     <th scope="col">Release date</th>
                     <th scope="col">Directed by</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
                 <tr th:each="movie: ${movies}">
-                    <td th:text="${movie.title}">Avatar 2</td>
+                    <td th:text="${#strings.abbreviate(movie.title, 64)}">Avatar 2</td>
                     <td class="text-nowrap" th:text="${movie.date}">2022</td>
                     <td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
+                    <td class="text-nowrap"><span th:if="${!movie.rented}"><button class="btn btn-primary btn-sm">Rent</button></span></td>
                 </tr>
                 </tbody>
             </table>

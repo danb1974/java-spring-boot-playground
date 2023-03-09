@@ -77,7 +77,7 @@ public class Movie implements IDtoEntity {
     public MovieDto toDto() throws Exception {
         MovieDto dto = new MovieDto(this.id);
 
-        dto.copyProperties(this, dto, "title");
+        dto.copyProperties(this, dto, "title", "rented");
         dto.setDate(this.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
         dto.setDirectorFullName(this.getDirector().getFullName());
 
