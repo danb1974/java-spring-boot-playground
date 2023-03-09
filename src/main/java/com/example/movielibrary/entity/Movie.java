@@ -63,8 +63,7 @@ public class Movie implements IDtoEntity {
         this.director = director;
     }
 
-    @Override
-    public BaseDto toDto() throws Exception {
+    public MovieDto toDto() throws Exception {
         MovieDto dto = new MovieDto(this.id);
 
         dto.copyProperties(this, dto, "title");

@@ -3,6 +3,7 @@ package com.example.movielibrary.controller;
 import com.example.movielibrary.classes.PagedRecords;
 import com.example.movielibrary.classes.Pager;
 import com.example.movielibrary.classes.PagingParams;
+import com.example.movielibrary.dto.MovieDto;
 import com.example.movielibrary.entity.Movie;
 import com.example.movielibrary.service.MovieService;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class AppController {
 
             int pageSize = 10;
 
-            PagedRecords<Movie> movies = movieService.getMovies(new PagingParams(page, pageSize));
+            PagedRecords<Movie, MovieDto> movies = movieService.getMovies(new PagingParams(page, pageSize));
             model.addAttribute("movies", movies.getRecordsDto());
 
             Pager pager = new Pager(page, pageSize, movies.getTotal());

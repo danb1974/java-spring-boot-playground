@@ -2,6 +2,7 @@ package com.example.movielibrary.service;
 
 import com.example.movielibrary.classes.PagedRecords;
 import com.example.movielibrary.classes.PagingParams;
+import com.example.movielibrary.dto.MovieDto;
 import com.example.movielibrary.entity.Movie;
 import com.example.movielibrary.repository.MovieRepository;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public class MovieService {
         return movieRepository.findAll(sort);
     }
 
-    public PagedRecords<Movie> getMovies(PagingParams pagingParams) {
+    public PagedRecords<Movie, MovieDto> getMovies(PagingParams pagingParams) {
         Sort sort = getDefaultSort();
         Page<Movie> page = movieRepository.findAll(pagingParams.getPageable(sort));
         return new PagedRecords<>(page);
