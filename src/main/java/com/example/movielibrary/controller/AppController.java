@@ -28,7 +28,7 @@ public class AppController {
     }
 
     @GetMapping("/")
-    public String homepage(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
+    public String movieList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             model.addAttribute("date", simpleDateFormat.format(new Date()));
