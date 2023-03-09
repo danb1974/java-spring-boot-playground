@@ -32,6 +32,10 @@ public class Pager {
         showNext = lastPage != totalPages;
     }
 
+    public int getTotalRecords() {
+        return totalRecords;
+    }
+
     public int getFirstPage() {
         return firstPage;
     }

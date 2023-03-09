@@ -1,60 +1,81 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout.html}">
 <head>
     <title>Movie list</title>
 </head>
-<body layout:fragment="body">
-<div class="row">
-    <div class="col">
-        <div class="d-flex justify-content-evenly h4 my-4" th:text="'Movie database on ' + ${date}"></div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Movie title</th>
-                <th scope="col">Release date</th>
-                <th scope="col">Directed by</th>
-            </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            <tr th:each="movie: ${movies}">
-                <td th:text="${movie.title}">Avatar 2</td>
-                <td class="text-nowrap" th:text="${movie.date}">2022</td>
-                <td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col">
-        <div class="d-flex justify-content-evenly h4 my-4">
-            <nav>
-                <ul class="pagination">
-                    <li class="page-item" th:if="${pager.showPrev}">
-                        <a class="page-link" th:href="@{''(page=${pager.currentPage} - 1)}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
+<div layout:fragment="body">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${!rented} ? 'active'" aria-current="page" th:href="@{''(filter=all)}">All</a>
                     </li>
-                    <li class="page-item" th:each="page: ${#numbers.sequence(pager.firstPage, pager.lastPage)}">
-                        <a class="page-link" th:href="@{''(page=${page})}" th:classappend="${page == pager.currentPage} ? 'active'" th:text="${page}">1</a>
-                    </li>
-                    <li class="page-item" th:if="${pager.showNext}">
-                        <a class="page-link" th:href="@{''(page=${pager.currentPage} + 1)}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${rented} ? 'active'" th:href="@{''(filter=rented)}">Rented</a>
                     </li>
                 </ul>
-            </nav>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-evenly h4 my-4" th:text="'Movie database on ' + ${date}"></div>
+
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Movie title</th>
+                    <th scope="col">Release date</th>
+                    <th scope="col">Directed by</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr th:each="movie: ${movies}">
+                    <td th:text="${movie.title}">Avatar 2</td>
+                    <td class="text-nowrap" th:text="${movie.date}">2022</td>
+                    <td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-evenly h4 my-4">
+                <nav th:if="${pager.totalRecords} > 0">
+                    <ul class="pagination">
+                        <li class="page-item" th:if="${pager.showPrev}">
+                            <a class="page-link" th:href="@{''(page=${pager.currentPage} - 1)}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:each="page: ${#numbers.sequence(pager.firstPage, pager.lastPage)}">
+                            <a class="page-link" th:href="@{''(page=${page})}"
+                               th:classappend="${page == pager.currentPage} ? 'active'" th:text="${page}">1</a>
+                        </li>
+                        <li class="page-item" th:if="${pager.showNext}">
+                            <a class="page-link" th:href="@{''(page=${pager.currentPage} + 1)}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div th:if="${pager.totalRecords} == 0">No records</div>
+            </div>
         </div>
     </div>
 </div>
-
-</body>
 </html>

@@ -28,14 +28,20 @@ public class AppController {
     }
 
     @GetMapping("/")
-    public String movieList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
+    public String movieList(
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "filter", required = false, defaultValue = "all") String filter,
+            Model model
+    ) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             model.addAttribute("date", simpleDateFormat.format(new Date()));
 
+            model.addAttribute("rented", filter.equals("rented"));
+
             int pageSize = 10;
 
-            PagedRecords<Movie, MovieDto> movies = movieService.getMovies(new PagingParams(page, pageSize));
+            PagedRecords<Movie, MovieDto> movies = movieService.getMoviesPaged(new PagingParams(page, pageSize), filter.equals("rented"));
             model.addAttribute("movies", movies.getRecordsDto());
 
             Pager pager = new Pager(page, pageSize, movies.getTotal());

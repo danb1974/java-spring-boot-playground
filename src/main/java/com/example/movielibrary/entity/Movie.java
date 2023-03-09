@@ -19,11 +19,14 @@ public class Movie implements IDtoEntity {
 
     private LocalDate date;
 
+    private boolean rented;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "director_id")
     private Director director;
 
-    protected Movie() {}
+    protected Movie() {
+    }
 
     public Movie(String title, LocalDate date, Director director) {
         this.title = title;
@@ -53,6 +56,14 @@ public class Movie implements IDtoEntity {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     public Director getDirector() {
