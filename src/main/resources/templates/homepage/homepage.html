@@ -47,7 +47,10 @@
                     <td th:text="${#strings.abbreviate(movie.title, 64)}">Avatar 2</td>
                     <td class="text-nowrap" th:text="${movie.date}">2022</td>
                     <td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
-                    <td class="text-nowrap"><span th:if="${!movie.rented}"><button class="btn btn-primary btn-sm">Rent</button></span></td>
+                    <td class="text-nowrap">
+                        <span th:if="${!rented && !movie.rented}"><button class="btn btn-primary btn-sm">Rent</button></span>
+                        <span th:if="${rented && movie.rented}"><button class="btn btn-primary btn-sm">Return</button></span>
+                    </td>
                 </tr>
                 </tbody>
             </table>

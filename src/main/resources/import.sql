@@ -111,3 +111,4 @@ insert into movies (id, title, date, rented, director_id) values (99, 'Laughing 
 insert into movies (id, title, date, rented, director_id) values (100, 'How About You...', '2022-02-18', 0, 1);
 
 update movies set director_id = floor(1 + rand() * 9);
+update movies set rented = floor(0.1 + rand());
