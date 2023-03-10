@@ -14,15 +14,16 @@ public class ApiController {
     public ResponseEntity<ApiResponse> test() {
         ApiResponse apiResponse = new ApiResponse();
 
-        apiResponse.setSuccess(true);
-        apiResponse.setMsg("Hello!");
-
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("string", "Happy");
-        data.put("integer", 13);
-        data.put("float", 3.1415926);
-        data.put("boolean", true);
-        apiResponse.setData(data);
+        try {
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("string", "Happy");
+            data.put("integer", 13);
+            data.put("float", 3.1415926);
+            data.put("boolean", true);
+            apiResponse.setData(data, "Hello!");
+        } catch (Exception e) {
+            apiResponse.setSuccess(false, e.getMessage());
+        }
 
         return apiResponse.getResponseEntity();
     }

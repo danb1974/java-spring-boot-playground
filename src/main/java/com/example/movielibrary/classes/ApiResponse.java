@@ -12,9 +12,9 @@ public class ApiResponse {
     private Object data;
 
     public ApiResponse() {
-        success = false;
-        msg = "";
-        data = new Object();
+        this.success = true;
+        this.msg = "";
+        this.data = new Object();
     }
 
     public boolean isSuccess() {
@@ -23,6 +23,11 @@ public class ApiResponse {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public void setSuccess(boolean success, String msg) {
+        this.success = success;
+        this.msg = msg;
     }
 
     public String getMsg() {
@@ -39,6 +44,11 @@ public class ApiResponse {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public void setData(Object data, String msg) {
+        this.data = data;
+        this.msg = msg;
     }
 
     @JsonIgnore

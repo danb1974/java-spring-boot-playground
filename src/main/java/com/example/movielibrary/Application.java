@@ -13,8 +13,8 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean(initMethod = "start", destroyMethod = "shutdown")
-    public Server inMemoryH2DatabaseServer() throws SQLException {
-        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
-    }
+//    @Bean(initMethod = "start", destroyMethod = "shutdown")
+//    public Server inMemoryH2DatabaseServer() throws SQLException {
+//        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
+//    }
 }
