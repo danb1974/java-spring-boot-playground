@@ -8,6 +8,9 @@
             </div>
             <div class="modal-body">
                 <p th:text="${content}">Modal body text goes here.</p>
+                <div class="d-none">
+                    <input type="hidden" th:each="key: ${data.keySet}" th:attr="name=${key},value=${data.get(key)}">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
