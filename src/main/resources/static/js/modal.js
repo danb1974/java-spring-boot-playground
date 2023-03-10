@@ -1,19 +1,30 @@
 $(() => {
-    let modal;
+    // window.htmx.on("htmx:afterSwap", (e) => {
+    //     let target = $(e.detail.target);
+    // });
 
-    window.htmx.on("htmx:afterSwap", (e) => {
-        let target = $(e.detail.target);
+    let body = $("body");
+    let bootstrapConfirmationModal = new bootstrap.Modal("#confirmationModal");
 
-        let modals = target.find(".modal");
-        if (!modals.length) {
-            return;
-        }
 
-        modal = new bootstrap.Modal(modals[0]);
-        modal.show();
+    body.on("click", "[data-action='rentMovieConfirm']", (e) => {
+        let elem = $(e.currentTarget);
+        let movieId = elem.data("movie-id");
+        console.log(`confirm rent movie ${movieId}`);
+
+        let modal = $("#confirmationModal");
+        modal.find("[data-modal-title]").html("Confirmation");
+        modal.find("[data-modal-content").html("Do you want to rent this movie?");
+        modal.find("[data-modal-button]").attr("data-action", "rentMovie").attr("data-movie-id", movieId);
+
+        bootstrapConfirmationModal.show();
     });
 
-    // $("body").on("click", ".modal button[hx-*]", (e) => {
-    //     modal.hide();
-    // });
+    body.on("click", "[data-action='rentMovie']", (e) => {
+        let elem = $(e.currentTarget);
+        let movieId = elem.data("movie-id");
+        console.log(`execute rent movie ${movieId}`);
+
+        bootstrapConfirmationModal.hide();
+    });
 });
