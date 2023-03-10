@@ -3,21 +3,6 @@
       layout:decorate="~{layout.html}">
 <head>
     <title>Movie list</title>
-    <script>
-        window.htmx.on("htmx:afterSwap", (e) => {
-            let children = e.detail.target.children;
-            if (children.length === 0) {
-                return;
-
-            }
-
-            let child = children[0];
-            if (child.classList.contains("modal")) {
-                let modal = new bootstrap.Modal(child);
-                modal.show();
-            }
-        })
-    </script>
 </head>
 <div layout:fragment="body">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
