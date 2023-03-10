@@ -14,11 +14,13 @@ public class FragmentController {
         model.addAllAttributes(new HashMap<>() {{
             put("title", "Confirmation");
             put("content", "Are you sure you want to rent this movie?");
-            put("data", new HashMap<String, String>() {{
-                put("movieId", Integer.toString(movieId));
-            }});
+            put("movieId", movieId);
         }});
 
         return "modals/confirmation";
     }
+
+//    public String rentMovie(Model model) {
+//
+//    }
 }
