@@ -43,19 +43,11 @@
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                <tr th:each="movie: ${movies}">
-                    <td th:text="${#strings.abbreviate(movie.title, 64)}">Avatar 2</td>
-                    <td class="text-nowrap" th:text="${movie.date}">2022</td>
-                    <td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
-                    <td class="text-nowrap">
-                        <span th:if="${!rented && !movie.rented}">
-                            <button class="btn btn-primary btn-sm" th:attr="data-action='rentMovieConfirm',data-movie-id=${movie.id}">Rent</button>
-                        </span>
-                        <span th:if="${rented && movie.rented}">
-                            <button class="btn btn-primary btn-sm" th:attr="data-action='returnMovieConfirm',data-movie-id=${movie.id}">Return</button>
-                        </span>
-                    </td>
-                </tr>
+                <th:block th:each="movie: ${movies}">
+                    <tr th:attr="data-movie-row='1',data-movie-id=${movie.id}">
+                        <th:block th:insert="~{fragments/movie.html}"></th:block>
+                    </tr>
+                </th:block>
                 </tbody>
             </table>
         </div>

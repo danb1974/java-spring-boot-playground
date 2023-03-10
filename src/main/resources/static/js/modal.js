@@ -25,6 +25,15 @@ $(() => {
         let movieId = elem.data("movie-id");
         console.log(`execute rent movie ${movieId}`);
 
+        window.htmx.ajax("POST", "/fragments/movie/rent", {
+            values: {
+                movieId: movieId
+            },
+            target: "[data-movie-row][data-movie-id='" + movieId + "']"
+        }).then(() => {
+            console.log("done");
+        });
+
         bootstrapConfirmationModal.hide();
     });
 });

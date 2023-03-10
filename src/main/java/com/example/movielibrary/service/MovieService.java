@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
@@ -27,6 +29,20 @@ public class MovieService {
         Pageable pageable = pagingParams.getPageable(sort);
         Page<Movie> page = onlyRented ? movieRepository.findAllByRented(pageable, true) : movieRepository.findAll(pageable);
         return new PagedRecords<>(page);
+    }
+
+    public Movie rentMovie(long movieId) throws Exception {
+        Optional<Movie> maybeMovie = movieRepository.findById(movieId);
+        if (maybeMovie.isEmpty()) {
+            throw new Exception("Invalid movie {movieId}");
+        }
+
+        Movie movie = maybeMovie.get();
+
+        movie.setRented(true);
+        movieRepository.save(movie);
+
+        return movie;
     }
 
     private Sort getDefaultSort() {

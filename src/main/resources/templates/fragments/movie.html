@@ -1,0 +1,15 @@
+<!--@thymesVar id="movie" type="com.example.movielibrary.dto.MovieDto"-->
+<!--@thymesVar id="rented" type="boolean"-->
+<td th:text="${#strings.abbreviate(movie.title, 64)}">Avatar 2</td>
+<td class="text-nowrap" th:text="${movie.date}">2022</td>
+<td class="text-nowrap" th:text="${movie.directorFullName}">James Cameron</td>
+<td class="text-nowrap">
+    <span th:if="${!rented && !movie.rented}">
+        <button class="btn btn-primary btn-sm"
+                th:attr="data-action='rentMovieConfirm',data-movie-id=${movie.id}">Rent</button>
+    </span>
+    <span th:if="${rented && movie.rented}">
+        <button class="btn btn-primary btn-sm"
+                th:attr="data-action='returnMovieConfirm',data-movie-id=${movie.id}">Return</button>
+    </span>
+</td>
