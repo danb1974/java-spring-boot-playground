@@ -9,7 +9,7 @@ $(() => {
 
     body.on("click", "[data-action='rentMovieConfirm']", (e) => {
         let elem = $(e.currentTarget);
-        let movieId = elem.data("movie-id");
+        let movieId = elem.attr("data-movie-id");
         console.log(`confirm rent movie ${movieId}`);
 
         let modal = $("#confirmationModal");
@@ -22,7 +22,7 @@ $(() => {
 
     body.on("click", "[data-action='rentMovie']", (e) => {
         let elem = $(e.currentTarget);
-        let movieId = elem.data("movie-id");
+        let movieId = elem.attr("data-movie-id");
         console.log(`execute rent movie ${movieId}`);
 
         window.htmx.ajax("POST", "/fragments/movie/rent", {
