@@ -1,22 +1,16 @@
 package com.example.movielibrary.classes;
 
-import com.example.movielibrary.dto.BaseDto;
-import com.example.movielibrary.interfaces.IDtoEntity;
 import org.springframework.data.domain.Page;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PagedRecords<T extends IDtoEntity, D extends BaseDto> {
-    private List<T> records = new ArrayList<>();
-
-    private int count;
+public class PagedRecords<T> {
+    private final List<T> records;
 
     private final int total;
 
     public PagedRecords(List<T> records, int total) {
         this.records = records;
-        this.count = records.size();
         this.total = total;
     }
 
@@ -24,13 +18,8 @@ public class PagedRecords<T extends IDtoEntity, D extends BaseDto> {
         this(page.getContent(), (int) page.getTotalElements());
     }
 
-    public PagedRecords(int total) {
-        this.total = total;
-    }
-
     public void addRecord(T record) {
         records.add(record);
-        count++;
     }
 
     public List<T> getRecords() {
@@ -38,22 +27,10 @@ public class PagedRecords<T extends IDtoEntity, D extends BaseDto> {
     }
 
     public int getCount() {
-        return count;
+        return records.size();
     }
 
     public int getTotal() {
         return total;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<D> getRecordsDto() throws Exception {
-        List<D> recordsDto = new ArrayList<>();
-
-        for (T record : records) {
-            BaseDto dto = record.toDto();
-            recordsDto.add((D) dto);
-        }
-
-        return recordsDto;
     }
 }

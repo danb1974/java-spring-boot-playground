@@ -1,7 +1,8 @@
-package com.example.movielibrary.controller;
+package com.example.movielibrary.controllers;
 
-import com.example.movielibrary.entity.Movie;
-import com.example.movielibrary.service.MovieService;
+import com.example.movielibrary.dtos.MovieDto;
+import com.example.movielibrary.entities.Movie;
+import com.example.movielibrary.services.MovieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class FragmentController {
 
         model.addAllAttributes(new HashMap<>() {{
             put("rented", false);
-            put("movie", movie.toDto());
+            put("movie", new MovieDto(movie));
         }});
 
         return "fragments/movie";
@@ -35,7 +36,7 @@ public class FragmentController {
 
         model.addAllAttributes(new HashMap<>() {{
             put("rented", true);
-            put("movie", movie.toDto());
+            put("movie", new MovieDto(movie));
         }});
 
         return "fragments/movie";
