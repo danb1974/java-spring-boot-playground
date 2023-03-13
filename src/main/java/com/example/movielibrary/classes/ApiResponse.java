@@ -1,9 +1,5 @@
 package com.example.movielibrary.classes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
 public class ApiResponse {
     private boolean success;
 

@@ -4,7 +4,6 @@ import com.example.movielibrary.classes.PagedRecords;
 import com.example.movielibrary.classes.Pager;
 import com.example.movielibrary.classes.PagingParams;
 import com.example.movielibrary.classes.mappers.ListEntityToDtoMapper;
-import com.example.movielibrary.dtos.MovieDto;
 import com.example.movielibrary.entities.Movie;
 import com.example.movielibrary.services.MovieService;
 import org.springframework.stereotype.Controller;

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    public Page<Movie> findAllByRented(Pageable pageable, boolean rented);
+    Page<Movie> findAllByRented(Pageable pageable, boolean rented);
 
 //    @Query("SELECT m FROM Movie m WHERE LOWER(m.title) = LOWER(:title)")
-//    public abstract Movie retrieveByName(@Param("title") String title);
+//    abstract Movie retrieveByName(@Param("title") String title);
 }
