@@ -2,16 +2,15 @@ package com.example.movielibrary.controller;
 
 import com.example.movielibrary.classes.ApiResponse;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-@Controller
+@RestController
 public class ApiController {
     @GetMapping(value = "/api/test", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponse> test() {
+    public ApiResponse test() {
         ApiResponse apiResponse = new ApiResponse();
 
         try {
@@ -25,6 +24,6 @@ public class ApiController {
             apiResponse.setSuccess(false, e.getMessage());
         }
 
-        return apiResponse.getResponseEntity();
+        return apiResponse;
     }
 }

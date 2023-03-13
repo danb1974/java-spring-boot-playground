@@ -50,9 +50,4 @@ public class ApiResponse {
         this.data = data;
         this.msg = msg;
     }
-
-    @JsonIgnore
-    public ResponseEntity<ApiResponse> getResponseEntity() {
-        return new ResponseEntity<>(this, HttpStatus.OK);
-    }
 }
