@@ -4,6 +4,7 @@ import com.example.movielibrary.classes.PagedRecords;
 import com.example.movielibrary.classes.PagingParams;
 import com.example.movielibrary.dto.MovieDto;
 import com.example.movielibrary.entity.Movie;
+import com.example.movielibrary.exceptions.NoSuchMovieException;
 import com.example.movielibrary.repository.MovieRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,10 +33,7 @@ public class MovieService {
     }
 
     public Movie rentMovie(long movieId) throws Exception {
-        Movie movie = movieRepository.findById(movieId).orElse(null);
-        if (movie == null) {
-            throw new Exception("Invalid movie {movieId}");
-        }
+        Movie movie = movieRepository.findById(movieId).orElseThrow(NoSuchMovieException::new);
 
         movie.setRented(true);
         movieRepository.save(movie);
@@ -44,10 +42,7 @@ public class MovieService {
     }
 
     public Movie returnMovie(long movieId) throws Exception {
-        Movie movie = movieRepository.findById(movieId).orElse(null);
-        if (movie == null) {
-            throw new Exception("Invalid movie {movieId}");
-        }
+        Movie movie = movieRepository.findById(movieId).orElseThrow(NoSuchMovieException::new);
 
         movie.setRented(false);
         movieRepository.save(movie);
