@@ -28,4 +28,16 @@ public class FragmentController {
 
         return "fragments/movie";
     }
+
+    @PostMapping("/fragments/movie/return")
+    public String returnMovie(@RequestParam(name = "movieId") int movieId, Model model) throws Exception {
+        Movie movie = movieService.returnMovie(movieId);
+
+        model.addAllAttributes(new HashMap<>() {{
+            put("rented", true);
+            put("movie", movie.toDto());
+        }});
+
+        return "fragments/movie";
+    }
 }

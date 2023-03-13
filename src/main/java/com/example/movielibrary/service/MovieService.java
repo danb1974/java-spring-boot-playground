@@ -45,6 +45,20 @@ public class MovieService {
         return movie;
     }
 
+    public Movie returnMovie(long movieId) throws Exception {
+        Optional<Movie> maybeMovie = movieRepository.findById(movieId);
+        if (maybeMovie.isEmpty()) {
+            throw new Exception("Invalid movie {movieId}");
+        }
+
+        Movie movie = maybeMovie.get();
+
+        movie.setRented(false);
+        movieRepository.save(movie);
+
+        return movie;
+    }
+
     private Sort getDefaultSort() {
         return Sort.by(Sort.Direction.DESC, "date");
     }
