@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagedRecords<T, D extends BaseDto> {
+public class PagedRecords<T extends IDtoEntity, D extends BaseDto> {
     private List<T> records = new ArrayList<>();
 
     private int count;
@@ -49,12 +49,8 @@ public class PagedRecords<T, D extends BaseDto> {
     public List<D> getRecordsDto() throws Exception {
         List<D> recordsDto = new ArrayList<>();
 
-        for (Object record : records) {
-            if (!(record instanceof IDtoEntity)) {
-                throw new Exception("Object is not an instance of IDtoEntity");
-            }
-
-            BaseDto dto = ((IDtoEntity) record).toDto();
+        for (T record : records) {
+            BaseDto dto = record.toDto();
             recordsDto.add((D) dto);
         }
 
