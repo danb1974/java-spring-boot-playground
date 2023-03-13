@@ -32,12 +32,10 @@ public class MovieService {
     }
 
     public Movie rentMovie(long movieId) throws Exception {
-        Optional<Movie> maybeMovie = movieRepository.findById(movieId);
-        if (maybeMovie.isEmpty()) {
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (movie == null) {
             throw new Exception("Invalid movie {movieId}");
         }
-
-        Movie movie = maybeMovie.get();
 
         movie.setRented(true);
         movieRepository.save(movie);
@@ -46,12 +44,10 @@ public class MovieService {
     }
 
     public Movie returnMovie(long movieId) throws Exception {
-        Optional<Movie> maybeMovie = movieRepository.findById(movieId);
-        if (maybeMovie.isEmpty()) {
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (movie == null) {
             throw new Exception("Invalid movie {movieId}");
         }
-
-        Movie movie = maybeMovie.get();
 
         movie.setRented(false);
         movieRepository.save(movie);
