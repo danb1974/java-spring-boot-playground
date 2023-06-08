@@ -1,19 +1,20 @@
 package com.example.movielibrary.classes.mappers;
 
-import com.example.movielibrary.dtos.MovieDto;
-import com.example.movielibrary.entities.Movie;
+import com.example.movielibrary.dtos.BaseDto;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListEntityToDtoMapper {
-    public static List<MovieDto> movieToMovieDto(List<Movie> movies) throws Exception {
-        List<MovieDto> movieDtos = new ArrayList<>();
+    public static <E, D extends BaseDto> List<D> entityListToDtoList(List<E> entities, Class<E> entityClass, Class<D> dtoClass) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        List<D> dtos = new ArrayList<>();
 
-        for (Movie movie: movies) {
-            movieDtos.add(new MovieDto(movie));
+        for (E entity : entities) {
+            D dto = dtoClass.getDeclaredConstructor(entityClass).newInstance(entity);
+            dtos.add(dto);
         }
 
-        return movieDtos;
+        return dtos;
     }
 }
